@@ -5,21 +5,131 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mahalaxmi Wholesaler</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f8f8f8; }
-    header { background: #2ecc71; color: white; padding: 15px; text-align: center; font-size: 22px; font-weight: bold; }
-    .container { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; padding: 20px; }
-    .card { background: white; border-radius: 10px; box-shadow: 0px 2px 6px rgba(0,0,0,0.1); padding: 15px; text-align: center; }
-    .card img { width: 100%; height: 200px; object-fit: cover; border-radius: 8px; }
-    .price { font-size: 18px; font-weight: bold; color: #27ae60; margin: 10px 0; }
-    .btn { background: #27ae60; color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; }
-    .btn:hover { background: #219150; }
-    footer { margin-top: 20px; padding: 20px; background: #222; color: white; text-align: center; }
-    .upi-box { background: white; padding: 15px; border-radius: 10px; display: inline-block; margin-top: 10px; }
-    .upi-box img { width: 200px; margin-top: 10px; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f1f3f6;
+    }
+
+    header {
+      background: linear-gradient(90deg, #2ecc71, #27ae60);
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-size: 22px;
+      font-weight: bold;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+      padding: 15px;
+      text-align: center;
+      transition: transform 0.2s;
+    }
+    .card:hover {
+      transform: scale(1.03);
+    }
+
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    h3 {
+      margin: 10px 0 5px;
+      font-size: 18px;
+      color: #333;
+    }
+
+    .price {
+      font-size: 16px;
+      font-weight: bold;
+      color: #27ae60;
+      margin: 8px 0;
+    }
+
+    .btn {
+      background: #27ae60;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background 0.2s;
+    }
+    .btn:hover {
+      background: #219150;
+    }
+
     /* Order Form */
-    #orderForm { display: none; background: white; padding: 20px; max-width: 400px; margin: 20px auto; border-radius: 10px; box-shadow: 0px 4px 10px rgba(0,0,0,0.2); }
-    #orderForm input, #orderForm textarea, #orderForm select { width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ccc; border-radius: 5px; }
-    #upiSection { display: none; margin-top: 10px; text-align: center; }
+    #orderForm {
+      display: none;
+      background: white;
+      padding: 20px;
+      max-width: 400px;
+      margin: 20px auto;
+      border-radius: 15px;
+      box-shadow: 0px 4px 12px rgba(0,0,0,0.2);
+      animation: fadeIn 0.4s ease-in-out;
+    }
+
+    #orderForm input, 
+    #orderForm textarea, 
+    #orderForm select {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    #upiSection {
+      display: none;
+      margin-top: 15px;
+      text-align: center;
+    }
+
+    .upi-box {
+      background: #f9f9f9;
+      padding: 10px;
+      border-radius: 10px;
+      display: inline-block;
+    }
+
+    .upi-box img {
+      width: 180px;
+      margin-top: 10px;
+      border-radius: 10px;
+    }
+
+    footer {
+      margin-top: 20px;
+      padding: 15px;
+      background: #222;
+      color: white;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: scale(0.95);}
+      to {opacity: 1; transform: scale(1);}
+    }
   </style>
 </head>
 <body>
@@ -60,19 +170,21 @@
 
 <!-- Order Form -->
 <div id="orderForm">
-  <h2>Order Form</h2>
+  <h2 style="text-align:center; color:#27ae60;">📝 Place Your Order</h2>
   <form onsubmit="sendToWhatsApp(event)">
     <input type="text" id="name" placeholder="Full Name" required>
     <input type="text" id="mobile" placeholder="Mobile Number" required>
     <textarea id="address" placeholder="Full Address" rows="3" required></textarea>
     <input type="number" id="quantity" placeholder="Quantity (in meters)" min="1" required>
+    
     <select id="payment" required onchange="toggleUPI(this.value)">
       <option value="">Select Payment Method</option>
       <option value="UPI">UPI</option>
       <option value="Cash on Delivery">Cash on Delivery</option>
     </select>
-    <input type="text" id="productInput" readonly>
     
+    <input type="text" id="productInput" readonly>
+
     <!-- UPI Section -->
     <div id="upiSection">
       <h3>Pay via UPI</h3>
@@ -83,7 +195,7 @@
       </div>
     </div>
     
-    <button type="submit" class="btn">Confirm Order</button>
+    <button type="submit" class="btn" style="width:100%; margin-top:10px;">✅ Confirm Order</button>
   </form>
 </div>
 
@@ -95,7 +207,7 @@
 function openForm(productName) {
   document.getElementById("orderForm").style.display = "block";
   document.getElementById("productInput").value = productName;
-  window.scrollTo(0, document.getElementById("orderForm").offsetTop);
+  window.scrollTo({top: document.getElementById("orderForm").offsetTop, behavior: 'smooth'});
 }
 
 function toggleUPI(value) {
@@ -116,14 +228,7 @@ function sendToWhatsApp(event) {
   let payment = document.getElementById("payment").value;
   let product = document.getElementById("productInput").value;
 
-  let message = `🧾 New Order Details%0A
-📦 Product: ${product}%0A
-📏 Quantity: ${quantity} meter%0A
-👤 Name: ${name}%0A
-📞 Mobile: ${mobile}%0A
-🏠 Address: ${address}%0A
-💳 Payment: ${payment}`;
-
+  let message = 🧾 *New Order* %0A📦 Product: ${product}%0A📏 Quantity: ${quantity} meter%0A👤 Name: ${name}%0A📞 Mobile: ${mobile}%0A🏠 Address: ${address}%0A💳 Payment: ${payment};
   let url = https://wa.me/919142304374?text=${message};
   window.open(url, '_blank');
 }
