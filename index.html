@@ -34,15 +34,50 @@
     font-size:14px;
   }
 
-  /* banner */
+  /* banner slider */
   .banner{
     background:#fff;
     margin:8px;
     border-radius:8px;
     overflow:hidden;
     box-shadow:0 2px 6px rgba(0,0,0,0.08);
+    position:relative;
   }
-  .banner img{width:100%;display:block}
+  .slider{
+    width:100%;
+    overflow:hidden;
+    border-radius:8px;
+    position:relative;
+  }
+  .slides{
+    display:flex;
+    width:300%;
+    animation:slide 12s infinite;
+  }
+  .slides img{
+    width:100%;
+    flex-shrink:0;
+    display:block;
+  }
+  @keyframes slide {
+    0%{transform:translateX(0%)}
+    30%{transform:translateX(0%)}
+    35%{transform:translateX(-100%)}
+    65%{transform:translateX(-100%)}
+    70%{transform:translateX(-200%)}
+    95%{transform:translateX(-200%)}
+    100%{transform:translateX(0%)}
+  }
+  .banner-text{
+    position:absolute;
+    bottom:15px;left:15px;
+    background:rgba(0,0,0,0.6);
+    color:#fff;
+    padding:8px 12px;
+    border-radius:6px;
+    font-size:16px;
+    font-weight:600;
+  }
 
   /* products */
   .container{
@@ -102,8 +137,16 @@
   </div>
 </header>
 
+<!-- Banner Slider -->
 <div class="banner">
-  <img src="https://i.ibb.co/dL5W7vz/banner-sample.jpg" alt="banner">
+  <div class="slider">
+    <div class="slides">
+      <img src="https://i.ibb.co/Rjv5gHB/1000089005.jpg" alt="Banner 1">
+      <img src="https://i.ibb.co/h1HKgM26/banner2.jpg" alt="Banner 2">
+      <img src="https://i.ibb.co/XkdpdnG1/banner3.jpg" alt="Banner 3">
+    </div>
+    <div class="banner-text">Explore Linen, Cotton, Checks & Sarees</div>
+  </div>
 </div>
 
 <div class="container" id="products">
