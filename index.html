@@ -25,9 +25,7 @@
     top:0;z-index:100;
   }
   header h1{font-size:18px;font-weight:700}
-  .search-box{
-    flex:1;margin-left:10px;
-  }
+  .search-box{flex:1;margin-left:10px;}
   .search-box input{
     width:100%;padding:6px 10px;
     border:none;border-radius:4px;
@@ -42,26 +40,11 @@
     overflow:hidden;
     box-shadow:0 2px 6px rgba(0,0,0,0.08);
     position:relative;
-    max-height:180px; /* Flipkart style slim banner */
+    max-height:180px;
   }
-  .slider{
-    width:100%;
-    overflow:hidden;
-    border-radius:8px;
-    position:relative;
-  }
-  .slides{
-    display:flex;
-    width:200%;
-    animation:slide 8s infinite;
-  }
-  .slides img{
-    width:100%;
-    height:180px;
-    flex-shrink:0;
-    display:block;
-    object-fit:cover;
-  }
+  .slider{width:100%;overflow:hidden;border-radius:8px;position:relative;}
+  .slides{display:flex;width:200%;animation:slide 8s infinite;}
+  .slides img{width:100%;height:180px;flex-shrink:0;display:block;object-fit:cover}
   @keyframes slide {
     0%{transform:translateX(0%)}
     40%{transform:translateX(0%)}
@@ -149,9 +132,7 @@
   </div>
 </div>
 
-<div class="container" id="products">
-  <!-- products inserted by JS -->
-</div>
+<div class="container" id="products"></div>
 
 <!-- Order form -->
 <div id="orderForm">
@@ -180,9 +161,7 @@
     <div id="upiSection" style="display:none">
       <p style="text-align:center; margin:6px 0">UPI ID: <b>yadavsandip4229-1@okicici</b></p>
       <div class="upi-box">
-        <img src="https://i.ibb.co/zVfLpD1v/Google-Pay-QR-1.png" 
-       alt="UPI QR" 
-
+        <img src="https://i.ibb.co/zVfLpD1v/Google-Pay-QR-1.png" alt="UPI QR">
       </div>
     </div>
 
@@ -194,28 +173,28 @@
 
 <script>
 const PRODUCTS = [
-  { id:5, name:'Yellow lilen', price:699, img:'https://i.ibb.co/XkpzW4FQ/61z-Msh-K4q0-L-AC-UY1100-FMwebp.webp' },
-  { id:6, name:'Black Premium lilen', price:699, img:'https://i.ibb.co/rfLMLBXY/61b-P0f-PBu-JL-AC-UF894-1000-QL80-FMwebp.webp' },
-  { id:7, name:'Pure White lilen', price:699, img:'https://i.ibb.co/PZTBn9Db/61-Gq-FNpr1d-L-AC-UY1100-FMwebp-1.webp' },
-  { id:5,  name:'Banarasi Silk Saree',      price:1599, img:'https://i.ibb.co/vCgfKbDc/IMG-20250918-WA0093.jpg' },
-  { id:6,  name:'Kanjivaram Saree',         price:1899, img:'https://i.ibb.co/ycPXzXhs/IMG-20250918-WA0092.jpg' },
-  { id:7,  name:'Printed Georgette Saree',  price:999,  img:'https://i.ibb.co/MkYCRzTW/IMG-20250918-WA0091.jpg' },
-  { id:8,  name:'Wedding Bridal Saree',     price:2499, img:'https://i.ibb.co/BHjDqG9r/IMG-20250918-WA0030.jpg' },
-  { id:9,  name:'Cotton Handloom Saree',    price:1199, img:'https://i.ibb.co/QvfgSw90/IMG-20250918-WA0089.jpg' },
-  { id:10, name:'Designer Partywear Saree', price:1699, img:'https://i.ibb.co/Kjh0LFWX/IMG-20250918-WA0027.jpg' },
-  { id:11, name:'Soft Linen Saree',         price:1399, img:'https://i.ibb.co/zT74rdkN/IMG-20250918-WA0088.jpg' },
-  { id:12, name:'Daily Wear Saree',         price:799,  img:'https://i.ibb.co/twcDSJsS/IMG-20250918-WA0007.jpg' },
-  { id:13, name:'Fancy Embroidery Saree',   price:1499, img:'https://i.ibb.co/1f7LxWNk/IMG-20250918-WA0055.jpg' },
-  { id:14, name:'Classic Chiffon Saree',    price:1299, img:'https://i.ibb.co/zdV8HqW/IMG-20250918-WA0003.jpg' },
-  { id:15, name:'New Premium Saree',        price:1499, img:'https://i.ibb.co/zdV8HqW/IMG-20250918-WA0003.jpg' },
+  { id:1, name:'Yellow lilen', price:699, img:'https://i.ibb.co/XkpzW4FQ/61z-Msh-K4q0-L-AC-UY1100-FMwebp.webp' },
+  { id:2, name:'Black Premium lilen', price:699, img:'https://i.ibb.co/rfLMLBXY/61b-P0f-PBu-JL-AC-UF894-1000-QL80-FMwebp.webp' },
+  { id:3, name:'Pure White lilen', price:699, img:'https://i.ibb.co/PZTBn9Db/61-Gq-FNpr1d-L-AC-UY1100-FMwebp-1.webp' },
+  { id:4, name:'Banarasi Silk Saree',      price:1599, img:'https://i.ibb.co/vCgfKbDc/IMG-20250918-WA0093.jpg' },
+  { id:5, name:'Kanjivaram Saree',         price:1899, img:'https://i.ibb.co/ycPXzXhs/IMG-20250918-WA0092.jpg' },
+  { id:6, name:'Printed Georgette Saree',  price:999,  img:'https://i.ibb.co/MkYCRzTW/IMG-20250918-WA0091.jpg' },
+  { id:7, name:'Wedding Bridal Saree',     price:2499, img:'https://i.ibb.co/BHjDqG9r/IMG-20250918-WA0030.jpg' },
+  { id:8, name:'Cotton Handloom Saree',    price:1199, img:'https://i.ibb.co/QvfgSw90/IMG-20250918-WA0089.jpg' },
+  { id:9, name:'Designer Partywear Saree', price:1699, img:'https://i.ibb.co/Kjh0LFWX/IMG-20250918-WA0027.jpg' },
+  { id:10,name:'Soft Linen Saree',         price:1399, img:'https://i.ibb.co/zT74rdkN/IMG-20250918-WA0088.jpg' },
+  { id:11,name:'Daily Wear Saree',         price:799,  img:'https://i.ibb.co/twcDSJsS/IMG-20250918-WA0007.jpg' },
+  { id:12,name:'Fancy Embroidery Saree',   price:1499, img:'https://i.ibb.co/1f7LxWNk/IMG-20250918-WA0055.jpg' },
+  { id:13,name:'Classic Chiffon Saree',    price:1299, img:'https://i.ibb.co/zdV8HqW/IMG-20250918-WA0003.jpg' },
+  { id:14,name:'New Premium Saree',        price:1499, img:'https://i.ibb.co/zdV8HqW/IMG-20250918-WA0003.jpg' },
 ];
-const productsEl = document.getElementById('products');
-const orderForm = document.getElementById('orderForm');
-const productInput = document.getElementById('productInput');
-const pricePer = document.getElementById('pricePer');
-const qtyEl = document.getElementById('quantity');
-const totalEl = document.getElementById('total');
-const upiSection = document.getElementById('upiSection');
+const productsEl=document.getElementById('products');
+const orderForm=document.getElementById('orderForm');
+const productInput=document.getElementById('productInput');
+const pricePer=document.getElementById('pricePer');
+const qtyEl=document.getElementById('quantity');
+const totalEl=document.getElementById('total');
+const upiSection=document.getElementById('upiSection');
 
 function renderProducts(list=PRODUCTS){
   productsEl.innerHTML='';
@@ -265,9 +244,11 @@ function sendToWhatsApp(e){
   const message=`🧾 New Order\n\n📦 Product: ${product}\n📏 Quantity: ${qty} meter\n👤 Name: ${name}\n📞 Mobile: ${mobile}\n🏠 Address: ${address}\n💳 Payment: ${payment}\n💰 Total: ₹${totalEl.textContent}`;
   const url=`https://wa.me/919142304374?text=${encodeURIComponent(message)}`;
   window.open(url,'_blank');
+
+  // success popup
+  alert("✅ Order Placed Successfully!");
 }
 
-/* search filter */
 function searchProducts(query){
   query=query.toLowerCase();
   const filtered=PRODUCTS.filter(p=>p.name.toLowerCase().includes(query));
