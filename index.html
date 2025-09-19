@@ -1,168 +1,296 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mahalaxmi Wholesaler</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f8f9fa;
-    }
-    header {
-      background: #007bff;
-      color: white;
-      padding: 15px;
-      text-align: center;
-      font-size: 22px;
-      font-weight: bold;
-    }
-    .container {
-      padding: 20px;
-      max-width: 600px;
-      margin: auto;
-    }
-    input, textarea, select {
-      width: 100%;
-      padding: 10px;
-      margin: 8px 0;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    .btn {
-      background: #007bff;
-      color: white;
-      padding: 12px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-    .btn:hover {
-      background: #0056b3;
-    }
-    footer {
-      margin-top: 20px;
-      padding: 15px;
-      background: #222;
-      color: white;
-      text-align: center;
-    }
-    .upi-box {
-      text-align: center;
-      margin: 20px 0;
-    }
-    .upi-box img {
-      width: 200px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-    }
-    /* ✅ Success Popup */
-    #successPopup {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.5);
-      z-index: 9999;
-      justify-content: center;
-      align-items: center;
-    }
-    #successPopup div {
-      background: white;
-      padding: 20px 30px;
-      border-radius: 10px;
-      text-align: center;
-      box-shadow: 0px 2px 10px rgba(0,0,0,0.3);
-    }
-    #successPopup h2 {
-      color: green;
-    }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Mahalaxmi Wholesaler</title>
+<style>
+  :root{
+    --green:#2874f0; 
+    --dark:#222;
+    --card-bg:#fff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Segoe UI",Roboto,Arial,sans-serif;background:#f1f3f6;color:#222;}
+
+  /* header */
+  header{
+    background:var(--green);
+    color:#fff;
+    padding:10px 14px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    position:sticky;
+    top:0;z-index:100;
+  }
+  header h1{font-size:18px;font-weight:700}
+  .search-box{
+    flex:1;margin-left:10px;
+  }
+  .search-box input{
+    width:100%;padding:6px 10px;
+    border:none;border-radius:4px;
+    font-size:14px;
+  }
+
+  /* banner slider */
+  .banner{
+    background:#fff;
+    margin:8px;
+    border-radius:8px;
+    overflow:hidden;
+    box-shadow:0 2px 6px rgba(0,0,0,0.08);
+    position:relative;
+    max-height:180px;
+  }
+  .slider{width:100%;overflow:hidden;border-radius:8px;position:relative;}
+  .slides{display:flex;width:200%;animation:slide 8s infinite;}
+  .slides img{width:100%;height:180px;flex-shrink:0;object-fit:cover}
+  @keyframes slide {
+    0%{transform:translateX(0%)}
+    40%{transform:translateX(0%)}
+    50%{transform:translateX(-100%)}
+    90%{transform:translateX(-100%)}
+    100%{transform:translateX(0%)}
+  }
+  .banner-text{
+    position:absolute;bottom:12px;left:12px;
+    background:rgba(0,0,0,0.6);color:#fff;
+    padding:6px 10px;border-radius:6px;
+    font-size:14px;font-weight:600;
+  }
+
+  /* products */
+  .container{
+    padding:8px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:10px;
+  }
+  .card{
+    background:var(--card-bg);
+    border-radius:8px;
+    overflow:hidden;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+    text-align:center;
+    transition:.2s;
+  }
+  .card img{width:100%;height:140px;object-fit:cover}
+  h3{font-size:15px;margin:6px 0;color:#333}
+  .price{color:#388e3c;font-weight:600;font-size:14px;margin-bottom:6px}
+  .btn{
+    background:var(--green);color:#fff;border:none;
+    padding:8px 10px;border-radius:4px;
+    font-size:14px;margin-bottom:8px;cursor:pointer;
+  }
+  .btn:active{transform:scale(.97)}
+
+  /* order form */
+  #orderForm{
+    display:none;max-width:420px;margin:14px auto 30px;background:#fff;border-radius:8px;
+    padding:16px;box-shadow:0 6px 20px rgba(0,0,0,0.15)
+  }
+  #orderForm h2{color:var(--green);text-align:center;margin-bottom:10px}
+  input,select,textarea{
+    width:100%;padding:10px;margin:6px 0;
+    border-radius:6px;border:1px solid #ddd;font-size:14px
+  }
+  .row{display:flex;gap:6px}
+  .row>*{flex:1}
+  .tot{background:#f9fffb;border:1px dashed #bff0c9;padding:8px;border-radius:6px;margin-top:6px}
+  .upi-box{display:flex;justify-content:center;margin-top:8px}
+  .upi-box img{width:130px;border-radius:6px;box-shadow:0 4px 10px rgba(0,0,0,0.08)}
+
+  footer{background:#fff;color:#555;text-align:center;padding:12px;font-size:13px;margin-top:20px;border-top:1px solid #ddd}
+
+  /* success popup */
+  #successPopup {
+    display: none;
+    position: fixed;
+    top:0; left:0; right:0; bottom:0;
+    background: rgba(0,0,0,0.4);
+    z-index: 9999;
+    justify-content:center;
+    align-items:center;
+  }
+  .popup-box {
+    background: #d4edda;
+    color: #155724;
+    padding: 20px 30px;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    animation: zoomIn 0.3s ease;
+  }
+  @keyframes zoomIn {
+    from {transform: scale(0.7); opacity:0;}
+    to {transform: scale(1); opacity:1;}
+  }
+</style>
 </head>
 <body>
 
 <header>
-  Mahalaxmi Wholesaler
+  <h1>Mahalaxmi</h1>
+  <div class="search-box">
+    <input type="text" placeholder="Search for products" oninput="searchProducts(this.value)" />
+  </div>
 </header>
 
-<div class="container">
-  <form>
-    <label>Customer Name</label>
-    <input type="text" name="name" required>
+<!-- Banner Slider -->
+<div class="banner">
+  <div class="slider">
+    <div class="slides">
+      <img src="https://i.ibb.co/wN3nDRBm/Blog-Banner-250524-Lines-sarees-Chinaya-Banaras-2.jpg" alt="Saree Banner 1">
+      <img src="https://i.ibb.co/R4JLWk5k/1.jpg" alt="Saree Banner 2">
+    </div>
+    <div class="banner-text">Explore Sarees, Linen & Cotton</div>
+  </div>
+</div>
 
-    <label>Mobile Number</label>
-    <input type="text" name="phone" required>
+<div class="container" id="products"></div>
 
-    <label>Full Address</label>
-    <textarea name="address" required></textarea>
+<!-- Order form -->
+<div id="orderForm">
+  <h2>Order Details</h2>
+  <form id="form" onsubmit="sendToWhatsApp(event)">
+    <label>Product</label>
+    <input id="productInput" type="text" readonly />
+    <div class="row">
+      <input id="name" type="text" placeholder="पूरा नाम" required />
+      <input id="mobile" type="tel" placeholder="मोबाइल नंबर" required />
+    </div>
+    <textarea id="address" placeholder="पूरा पता (Village/City/Pin)" rows="3" required></textarea>
+    <div class="row">
+      <input id="pricePer" type="number" readonly />
+      <input id="quantity" type="number" min="1" value="1" required />
+    </div>
+    <div class="tot">कुल ₹: <span id="total">0</span></div>
 
-    <label>Product Name</label>
-    <input type="text" name="product" value="Black Premium lilen - ₹699/meter" readonly>
-
-    <label>Total Amount</label>
-    <input type="text" name="total" value="699" readonly>
-
-    <label>Payment Method</label>
-    <select name="payment">
+    <label style="margin-top:8px">Payment</label>
+    <select id="payment" onchange="toggleUPI(this.value)" required>
+      <option value="">-- Payment method चुनें --</option>
       <option value="UPI">UPI</option>
       <option value="Cash on Delivery">Cash on Delivery</option>
     </select>
 
-    <!-- ✅ QR Code -->
-    <div class="upi-box">
-      <p><b>Scan & Pay</b></p>
-      <img src="upiqr.png" alt="UPI QR">
-      <p>UPI ID: <b>yadavsandip4229-1@okicici</b></p>
+    <div id="upiSection" style="display:none">
+      <p style="text-align:center; margin:6px 0">UPI ID: <b>yadavsandip4229-1@okicici</b></p>
+      <div class="upi-box">
+        <img src="https://i.ibb.co/zVfLpD1v/Google-Pay-QR-1.png" alt="UPI QR">
+      </div>
     </div>
 
-    <!-- Confirm Button -->
-    <button type="submit" class="btn">Confirm & Send to WhatsApp</button>
+    <button class="btn" type="submit" style="width:100%; margin-top:12px">Confirm & Send to WhatsApp</button>
   </form>
 </div>
 
-<footer>
-  © 2025 Mahalaxmi Wholesaler • Shakuntala Nagar, Nawada
-</footer>
-
-<!-- ✅ Success Popup -->
+<!-- Success Popup -->
 <div id="successPopup">
-  <div>
-    <h2>🎉 Order Successfully Placed!</h2>
-    <p>Thank you for shopping with us.</p>
-  </div>
+  <div class="popup-box">✅ Order Placed Successfully!</div>
 </div>
 
+<footer>© 2025 Mahalaxmi Wholesaler • Shakuntala Nagar, Nawada • 📞 7091723553</footer>
+
 <script>
-document.querySelector("form").addEventListener("submit", function(e){
-    e.preventDefault();
+const PRODUCTS = [
+  { id:5, name:'Yellow lilen', price:699, img:'https://i.ibb.co/XkpzW4FQ/61z-Msh-K4q0-L-AC-UY1100-FMwebp.webp' },
+  { id:6, name:'Black Premium lilen', price:699, img:'https://i.ibb.co/rfLMLBXY/61b-P0f-PBu-JL-AC-UF894-1000-QL80-FMwebp.webp' },
+  { id:7, name:'Pure White lilen', price:699, img:'https://i.ibb.co/PZTBn9Db/61-Gq-FNpr1d-L-AC-UY1100-FMwebp-1.webp' },
+  { id:8,  name:'Banarasi Silk Saree',      price:1599, img:'https://i.ibb.co/vCgfKbDc/IMG-20250918-WA0093.jpg' },
+  { id:9,  name:'Kanjivaram Saree',         price:1899, img:'https://i.ibb.co/ycPXzXhs/IMG-20250918-WA0092.jpg' },
+  { id:10, name:'Printed Georgette Saree',  price:999,  img:'https://i.ibb.co/MkYCRzTW/IMG-20250918-WA0091.jpg' },
+  { id:11, name:'Wedding Bridal Saree',     price:2499, img:'https://i.ibb.co/BHjDqG9r/IMG-20250918-WA0030.jpg' },
+  { id:12, name:'Cotton Handloom Saree',    price:1199, img:'https://i.ibb.co/QvfgSw90/IMG-20250918-WA0089.jpg' },
+  { id:13, name:'Designer Partywear Saree', price:1699, img:'https://i.ibb.co/Kjh0LFWX/IMG-20250918-WA0027.jpg' },
+  { id:14, name:'Soft Linen Saree',         price:1399, img:'https://i.ibb.co/zT74rdkN/IMG-20250918-WA0088.jpg' },
+  { id:15, name:'Daily Wear Saree',         price:799,  img:'https://i.ibb.co/twcDSJsS/IMG-20250918-WA0007.jpg' },
+  { id:16, name:'Fancy Embroidery Saree',   price:1499, img:'https://i.ibb.co/1f7LxWNk/IMG-20250918-WA0055.jpg' },
+  { id:17, name:'Classic Chiffon Saree',    price:1299, img:'https://i.ibb.co/zdV8HqW/IMG-20250918-WA0003.jpg' }
+];
+const productsEl = document.getElementById('products');
+const orderForm = document.getElementById('orderForm');
+const productInput = document.getElementById('productInput');
+const pricePer = document.getElementById('pricePer');
+const qtyEl = document.getElementById('quantity');
+const totalEl = document.getElementById('total');
+const upiSection = document.getElementById('upiSection');
 
-    // ✅ Form values
-    let form = e.target;
-    let name = form.querySelector("input[name='name']").value;
-    let phone = form.querySelector("input[name='phone']").value;
-    let address = form.querySelector("textarea[name='address']").value;
-    let product = form.querySelector("input[name='product']").value;
-    let total = form.querySelector("input[name='total']").value;
-    let payment = form.querySelector("select[name='payment']").value;
+function renderProducts(list=PRODUCTS){
+  productsEl.innerHTML='';
+  list.forEach(p=>{
+    const div=document.createElement('div');
+    div.className='card';
+    div.innerHTML=`
+      <img src="${p.img}" alt="${p.name}">
+      <h3>${p.name}</h3>
+      <div class="price">₹${p.price} / meter</div>
+      <button class="btn" onclick="openForm(${p.id})">Buy Now</button>
+    `;
+    productsEl.appendChild(div);
+  });
+}
+renderProducts();
 
-    // ✅ WhatsApp message
-    let msg = `🛍️ *New Order*%0AName: ${name}%0APhone: ${phone}%0AAddress: ${address}%0AProduct: ${product}%0ATotal: ₹${total}%0APayment: ${payment}`;
-    let whatsappUrl = `https://wa.me/919142304374?text=${msg}`;
-    window.open(whatsappUrl, "_blank");
+function openForm(id){
+  const p=PRODUCTS.find(x=>x.id===id);
+  productInput.value=`${p.name} - ₹${p.price}/meter`;
+  pricePer.value=p.price;
+  qtyEl.value=1;
+  calcTotal();
+  upiSection.style.display='none';
+  orderForm.style.display='block';
+  window.scrollTo({top:orderForm.offsetTop-10,behavior:'smooth'});
+}
 
-    // ✅ Show success popup
-    let popup = document.getElementById("successPopup");
-    popup.style.display = "flex";
+function calcTotal(){
+  const price=Number(pricePer.value)||0;
+  const qty=Number(qtyEl.value)||1;
+  totalEl.textContent=(price*qty).toFixed(0);
+}
+qtyEl.addEventListener('input',calcTotal);
 
-    // ✅ Hide popup & redirect after 3 sec
-    setTimeout(()=>{
-        popup.style.display = "none";
-        window.location.href = "index.html";
-    }, 3000);
-});
+function toggleUPI(v){upiSection.style.display=(v==='UPI')?'block':'none'}
+
+function sendToWhatsApp(e){
+  e.preventDefault();
+  const name=encodeURIComponent(document.getElementById('name').value.trim());
+  const mobile=encodeURIComponent(document.getElementById('mobile').value.trim());
+  const address=encodeURIComponent(document.getElementById('address').value.trim());
+  const qty=encodeURIComponent(qtyEl.value);
+  const product=encodeURIComponent(productInput.value);
+  const payment=encodeURIComponent(document.getElementById('payment').value);
+
+  if(!name||!mobile||!address||!qty||!product||!payment){
+    alert('कृपया सारे फील्ड भरें।');return;
+  }
+
+  const message=`🧾 New Order\n\n📦 Product: ${product}\n📏 Quantity: ${qty} meter\n👤 Name: ${name}\n📞 Mobile: ${mobile}\n🏠 Address: ${address}\n💳 Payment: ${payment}\n💰 Total: ₹${totalEl.textContent}`;
+  const url=`https://wa.me/919142304374?text=${encodeURIComponent(message)}`;
+
+  // WhatsApp नया tab में खुलेगा
+  window.open(url,'_blank');
+
+  // Popup दिखाना
+  const popup=document.getElementById('successPopup');
+  popup.style.display='flex';
+
+  // 3 सेकंड बाद popup बंद
+  setTimeout(()=>{
+    popup.style.display='none';
+    orderForm.style.display='none';
+    window.scrollTo({top:0,behavior:'smooth'});
+  },3000);
+}
+
+/* search filter */
+function searchProducts(query){
+  query=query.toLowerCase();
+  const filtered=PRODUCTS.filter(p=>p.name.toLowerCase().includes(query));
+  renderProducts(filtered);
+}
 </script>
-
 </body>
 </html>
