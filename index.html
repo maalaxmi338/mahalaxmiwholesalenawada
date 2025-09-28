@@ -75,14 +75,18 @@
     box-shadow:0 2px 8px rgba(0,0,0,0.1);
     text-align:center;
     transition:.2s;
+    padding-bottom:8px;
   }
   .card img{width:100%;height:140px;object-fit:cover}
   h3{font-size:15px;margin:6px 0;color:#333}
-  .price{color:#388e3c;font-weight:600;font-size:14px;margin-bottom:6px}
+  .price-box{margin:4px 0}
+  .old-price{text-decoration:line-through;color:#999;font-size:13px;margin-right:4px}
+  .price{color:#388e3c;font-weight:600;font-size:14px}
+  .offer{color:#d32f2f;font-size:12px;font-weight:600;margin-left:4px}
   .btn{
     background:var(--green);color:#fff;border:none;
     padding:8px 10px;border-radius:4px;
-    font-size:14px;margin-bottom:8px;cursor:pointer;
+    font-size:14px;margin-top:6px;cursor:pointer;
   }
   .btn:active{transform:scale(.97)}
 
@@ -196,19 +200,19 @@
 
 <script>
 const PRODUCTS = [
-  { id:5, name:'Yellow lilen', price:699, img:'https://i.ibb.co/XkpzW4FQ/61z-Msh-K4q0-L-AC-UY1100-FMwebp.webp' },
-  { id:6, name:'Black Premium lilen', price:699, img:'https://i.ibb.co/rfLMLBXY/61b-P0f-PBu-JL-AC-UF894-1000-QL80-FMwebp.webp' },
-  { id:7, name:'Pure White lilen', price:699, img:'https://i.ibb.co/PZTBn9Db/61-Gq-FNpr1d-L-AC-UY1100-FMwebp-1.webp' },
-  { id:8,  name:'Banarasi Silk Saree',      price:1599, img:'https://i.ibb.co/vCgfKbDc/IMG-20250918-WA0093.jpg' },
-  { id:9,  name:'Kanjivaram Saree',         price:1899, img:'https://i.ibb.co/ycPXzXhs/IMG-20250918-WA0092.jpg' },
-  { id:10, name:'Printed Georgette Saree',  price:999,  img:'https://i.ibb.co/MkYCRzTW/IMG-20250918-WA0091.jpg' },
-  { id:11, name:'Wedding Bridal Saree',     price:2499, img:'https://i.ibb.co/BHjDqG9r/IMG-20250918-WA0030.jpg' },
-  { id:12, name:'Cotton Handloom Saree',    price:1199, img:'https://i.ibb.co/QvfgSw90/IMG-20250918-WA0089.jpg' },
-  { id:13, name:'Designer Partywear Saree', price:1699, img:'https://i.ibb.co/Kjh0LFWX/IMG-20250918-WA0027.jpg' },
-  { id:14, name:'Soft Linen Saree',         price:1399, img:'https://i.ibb.co/zT74rdkN/IMG-20250918-WA0088.jpg' },
-  { id:15, name:'Daily Wear Saree',         price:799,  img:'https://i.ibb.co/twcDSJsS/IMG-20250918-WA0007.jpg' },
-  { id:16, name:'Fancy Embroidery Saree',   price:1499, img:'https://i.ibb.co/1f7LxWNk/IMG-20250918-WA0055.jpg' },
-  { id:17, name:'Classic Chiffon Saree',    price:1299, img:'https://i.ibb.co/zdV8HqW/IMG-20250918-WA0003.jpg' }
+  { id:5, name:'Yellow lilen', price:699, mrp:999, img:'https://i.ibb.co/XkpzW4FQ/61z-Msh-K4q0-L-AC-UY1100-FMwebp.webp' },
+  { id:6, name:'Black Premium lilen', price:699, mrp:999, img:'https://i.ibb.co/rfLMLBXY/61b-P0f-PBu-JL-AC-UF894-1000-QL80-FMwebp.webp' },
+  { id:7, name:'Pure White lilen', price:699, mrp:899, img:'https://i.ibb.co/PZTBn9Db/61-Gq-FNpr1d-L-AC-UY1100-FMwebp-1.webp' },
+  { id:8,  name:'Banarasi Silk Saree',      price:1599, mrp:1999, img:'https://i.ibb.co/vCgfKbDc/IMG-20250918-WA0093.jpg' },
+  { id:9,  name:'Kanjivaram Saree',         price:1899, mrp:2299, img:'https://i.ibb.co/ycPXzXhs/IMG-20250918-WA0092.jpg' },
+  { id:10, name:'Printed Georgette Saree',  price:999,  mrp:1299, img:'https://i.ibb.co/MkYCRzTW/IMG-20250918-WA0091.jpg' },
+  { id:11, name:'Wedding Bridal Saree',     price:2499, mrp:2999, img:'https://i.ibb.co/BHjDqG9r/IMG-20250918-WA0030.jpg' },
+  { id:12, name:'Cotton Handloom Saree',    price:1199, mrp:1499, img:'https://i.ibb.co/QvfgSw90/IMG-20250918-WA0089.jpg' },
+  { id:13, name:'Designer Partywear Saree', price:1699, mrp:2099, img:'https://i.ibb.co/Kjh0LFWX/IMG-20250918-WA0027.jpg' },
+  { id:14, name:'Soft Linen Saree',         price:1399, mrp:1799, img:'https://i.ibb.co/zT74rdkN/IMG-20250918-WA0088.jpg' },
+  { id:15, name:'Daily Wear Saree',         price:799,  mrp:999,  img:'https://i.ibb.co/twcDSJsS/IMG-20250918-WA0007.jpg' },
+  { id:16, name:'Fancy Embroidery Saree',   price:1499, mrp:1899, img:'https://i.ibb.co/1f7LxWNk/IMG-20250918-WA0055.jpg' },
+  { id:17, name:'Classic Chiffon Saree',    price:1299, mrp:1599, img:'https://i.ibb.co/zdV8HqW/IMG-20250918-WA0003.jpg' }
 ];
 const productsEl = document.getElementById('products');
 const orderForm = document.getElementById('orderForm');
@@ -221,12 +225,17 @@ const upiSection = document.getElementById('upiSection');
 function renderProducts(list=PRODUCTS){
   productsEl.innerHTML='';
   list.forEach(p=>{
+    const discount = Math.round(((p.mrp - p.price) / p.mrp) * 100);
     const div=document.createElement('div');
     div.className='card';
     div.innerHTML=`
       <img src="${p.img}" alt="${p.name}">
       <h3>${p.name}</h3>
-      <div class="price">₹${p.price} / meter</div>
+      <div class="price-box">
+        <span class="old-price">₹${p.mrp}</span>
+        <span class="price">₹${p.price}</span>
+        <span class="offer">${discount}% OFF</span>
+      </div>
       <button class="btn" onclick="openForm(${p.id})">Buy Now</button>
     `;
     productsEl.appendChild(div);
@@ -270,14 +279,10 @@ function sendToWhatsApp(e){
   const message=`🧾 New Order\n\n📦 Product: ${product}\n📏 Quantity: ${qty} meter\n👤 Name: ${name}\n📞 Mobile: ${mobile}\n🏠 Address: ${address}\n💳 Payment: ${payment}\n💰 Total: ₹${totalEl.textContent}`;
   const url=`https://wa.me/919142304374?text=${encodeURIComponent(message)}`;
 
-  // WhatsApp नया tab में खुलेगा
   window.open(url,'_blank');
 
-  // Popup दिखाना
   const popup=document.getElementById('successPopup');
   popup.style.display='flex';
-
-  // 3 सेकंड बाद popup बंद
   setTimeout(()=>{
     popup.style.display='none';
     orderForm.style.display='none';
